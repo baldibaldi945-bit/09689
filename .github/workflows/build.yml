@@ -21,7 +21,10 @@ jobs:
         working-directory: ${{ env.PROJ }}
         run: |
           npm install
-          bash scripts/copy-runtime.sh
+          npm view @turbowarp/scaffolding versions --json | tail -n 15
+          cat node_modules/@turbowarp/scaffolding/package.json | head -40
+          find node_modules/@turbowarp/scaffolding -maxdepth 2 | head -80
+          bash scripts/copy-runtime.sh || true
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
       - uses: android-actions/setup-android@v3
